@@ -87,3 +87,4 @@ barplot(height=c((ant_delta/year_diff*(-1)),(grn_delta/year_diff*(-1))),
 dev.off()
 
 
+

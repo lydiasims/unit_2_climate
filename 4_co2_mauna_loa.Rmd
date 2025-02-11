@@ -68,6 +68,7 @@ dev.off()
 ```
 
 #### Examine seasonality of CO2 data 
+#where Lydia entered class
 
 Now let's take a closer look at the monthly cycle. We can subtract the deseasonalized CO2, i.e. the trend, to just look at the seasonal variation. We do this by making a new column in our data.frame using `$`
 
@@ -75,6 +76,41 @@ Now let's take a closer look at the monthly cycle. We can subtract the deseasona
 co2$seasonal_cycle = co2$monthly_average - co2$deseasonalized #Calculate detrended co2 fluctuation
 head(co2)
 plot(seasonal_cycle ~ decimal_date, type="l", data=co2) 
+
+#
+co2$decimal_date>2020
+which(co2$decimal_date>2020)
+
+co2_20200to2025=co2[co2$decimal_date>2020, ]
+co2_20200to2025=co2[which(co2$decimal_date>2020), ]
+summary(co2_20200to2025)
+
+plot(seasonal_cycle ~ decimal_date, data=co2_20200to2025, type='l')
+
+
+jan_anomalies= co2$seasonal_cycle[which(co2$month==1)]
+summary(jan_anomalies)
+
+
+
+co2_monthly_cycle=data.frame(month=seq(12),detrended_monthly_cycle=NA)
+co2_monthly_cycle$detrended_monthly_cycle[1]=mean(co2[co2$month==1,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[2]=mean(co2[co2$month==2,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[3]=mean(co2[co2$month==3,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[4]=mean(co2[co2$month==4,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[5]=mean(co2[co2$month==5,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[6]=mean(co2[co2$month==6,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[7]=mean(co2[co2$month==7,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[8]=mean(co2[co2$month==8,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[9]=mean(co2[co2$month==9,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[10]=mean(co2[co2$month==10,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[11]=mean(co2[co2$month==11,"seasonal_cycle"])
+co2_monthly_cycle$detrended_monthly_cycle[12]=mean(co2[co2$month==12,"seasonal_cycle"])
+
+co2_monthly_cycle
+
+plot(detrended_monthly_cycle~month,data=co2_monthly_cycle,type='l')
+
 ```
 
 We can subset the data to look at the most recent 5 years. This will allow us to see the monthly cycle better. Here's a quick refresher on subsetting:

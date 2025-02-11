@@ -30,6 +30,17 @@ The `that` object should be a set of objects (often a vector of numbers or chara
 for (i in c(1:4)) {
   print("one run")
 }
+
+i=77
+print(paste('this is run',i))
+
+for(i in c(1,2,3,4)){
+  print(paste('this is run',i))
+  
+}
+i
+
+
 ```
 
 Each time the for loop ran is called an *iteration*. This loop ran 4 times, and therefore printed "one run" 4 times, because the *iterand* named `i` stepped through a vector with 4 elements. The code in your loop can access this value by calling the `i` object. For example:
@@ -64,10 +75,15 @@ The most common usage of a for loop is to create some iterand (often named `i`) 
 my_vector = c(1,3,5,2,4)
 n = length(my_vector)
 my_vector_squared = rep(NA,n) # initialize the results vector
+total=0
 for (i in seq(n)) {
   my_vector_squared[i] = my_vector[i]^2
+  
+  print(paste('i=',i,' and my_vector[i]=',my_vector[i],' and my_vector_sq[i]=',my_vector_squared[i]))
+  total=total+my_vector_squared[i]
 }
 my_vector_squared
+
 ```
 
 It is important to note here that an empty vector with the correct length was made before starting the `for` loop and the iterand `i` was used to step through both our original data vector and our new results vector. Programmers call this *initializing* an object, or creating an empty object to fill later. This is a much better (and faster) practice than appending a new result onto a results vector, and therefore changing the length of the results vector with every iteration of the loop. 
